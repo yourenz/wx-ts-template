@@ -2,7 +2,8 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
+      "@vant/weapp/*": ["path/to/node_modules/@vant/weapp/dist/*"]
     },
     "strictNullChecks": true,
     "noImplicitAny": true,

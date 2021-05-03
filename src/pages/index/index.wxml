@@ -1,1 +1,1 @@
-<text>Hello World !!!</text>
+<van-button type="primary">Hello World</van-button>
