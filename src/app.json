@@ -7,7 +7,5 @@
     "navigationBarTextStyle": "black"
   },
   "sitemapLocation": "sitemap.json",
-  "usingComponents": {
-    "van-button": "@vant/weapp/button/index"
-  }
+  "usingComponents": {}
 }
