@@ -6,3 +6,4 @@ interface IAppOption {
   }
   userInfoReadyCallback?: WechatMiniprogram.GetUserInfoSuccessCallback
 }
+declare module 'miniprogram-computed'
