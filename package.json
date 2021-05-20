@@ -1,4 +1,5 @@
 {
+  "private": "true",
   "name": "miniprogram-ts-quickstart",
   "version": "1.0.0",
   "description": "",
@@ -7,9 +8,13 @@
     "build": "gulp build",
     "tsc": "./node_modules/typescript/bin/tsc",
     "compile": "tsc",
-    "lint:fix": "eslint ./src --ext .jsx,.js,.ts,.tsx --quiet --fix --ignore-path ./.gitignore",
-    "lint:format": "prettier  --loglevel warn --write \"./**/*.{js,jsx,ts,tsx,css,md,json}\" ",
-    "lint": "yarn lint:format && yarn lint:fix "
+    "lint:fix": "eslint ./src --ext .ts,.tsx --quiet --fix --ignore-path ./.eslintignore",
+    "lint:format": "prettier  --loglevel warn --write \"./**/*.{js,jsx,ts,tsx,css,md,json,scss,less}\" ",
+    "lint": "yarn lint:format && yarn lint:fix",
+    "postinstall": "husky install"
+  },
+  "lint-staged": {
+    "*": "yarn lint"
   },
   "keywords": [],
   "author": "",
@@ -33,13 +38,13 @@
     "gulp-sourcemaps": "^3.0.0",
     "gulp-ts-alias": "^1.3.0",
     "gulp-typescript": "^6.0.0-alpha.1",
+    "husky": "^6.0.0",
+    "lint-staged": "^11.0.0",
     "miniprogram-api-typings": "^2.8.3-1",
     "postcss": "^8.2.13",
-    "pre-commit": "^1.2.2",
     "prettier": "^2.2.1",
     "typescript": "^3.3.3333"
   },
-  "pre-commit": "lint",
   "license": "MIT",
   "dependencies": {
     "fast-deep-equal": "^2.0.1",
