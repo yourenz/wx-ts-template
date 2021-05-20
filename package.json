@@ -14,7 +14,7 @@
     "postinstall": "husky install"
   },
   "lint-staged": {
-    "*": "yarn lint"
+    "*.{ts,tsx}": "yarn lint"
   },
   "keywords": [],
   "author": "",
