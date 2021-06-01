@@ -8,13 +8,14 @@
     "build": "gulp build",
     "tsc": "./node_modules/typescript/bin/tsc",
     "compile": "tsc",
-    "lint:fix": "eslint ./src --ext .ts,.tsx --quiet --fix --ignore-path ./.eslintignore",
-    "lint:format": "prettier  --loglevel warn --write \"./**/*.{js,jsx,ts,tsx,css,md,json,scss,less}\" ",
+    "lint:fix": "eslint --fix",
+    "lint:format": "prettier --write .",
     "lint": "yarn lint:format && yarn lint:fix",
     "postinstall": "husky install"
   },
   "lint-staged": {
-    "*.{ts,tsx}": "yarn lint"
+     "*.{ts,tsx,js}": "yarn lint:fix",
+    "*.{ts,tsx,js,html,css,scss,less,md,json}": "yarn lint:format"
   },
   "keywords": [],
   "author": "",
@@ -46,9 +47,5 @@
     "typescript": "^3.3.3333"
   },
   "license": "MIT",
-  "dependencies": {
-    "fast-deep-equal": "^2.0.1",
-    "miniprogram-computed": "^4.0.0",
-    "rfdc": "^1.1.4"
-  }
+  "dependencies": {}
 }
