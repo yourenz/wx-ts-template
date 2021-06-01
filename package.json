@@ -14,7 +14,7 @@
     "postinstall": "husky install"
   },
   "lint-staged": {
-     "*.{ts,tsx,js}": "yarn lint:fix",
+    "*.{ts,tsx,js}": "yarn lint:fix",
     "*.{ts,tsx,js,html,css,scss,less,md,json}": "yarn lint:format"
   },
   "keywords": [],
