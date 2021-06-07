@@ -23,8 +23,7 @@
     "removeComments": true,
     "pretty": true,
     "strictPropertyInitialization": true,
-    "lib": ["es6"],
-    "types": ["miniprogram-api-typings"]
+    "lib": ["es6"]
   },
   "include": ["./**/*.ts"],
   "exclude": ["node_modules", "dist"]
