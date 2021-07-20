@@ -1,3 +1,5 @@
 node_modules
 dist
-gulpfile.js
+.github
+.husky
+src/api

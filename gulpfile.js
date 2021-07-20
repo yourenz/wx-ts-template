@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 // https://github.com/godbasin/wxapp-typescript-demo/blob/master/gulpfile.js
 
 const gulp = require('gulp')
@@ -7,11 +8,9 @@ const changed = require('gulp-changed')
 const clear = require('gulp-clean')
 const del = require('del')
 
-const less = require('gulp-less')
 const sass = require('gulp-dart-sass')
 const postcss = require('gulp-postcss')
 const autoprefixer = require('autoprefixer')
-
 
 const ts = require('gulp-typescript')
 const tsProject = ts.createProject('tsconfig.json')
@@ -24,10 +23,9 @@ const option = {
   base: 'src',
   allowEmpty: true,
 }
+
 const dist = __dirname + '/dist'
-const copyPath = ['src/**/!(_)*.*', '!src/**/*.less', '!src/**/*.sass', '!src/**/*.scss', '!src/**/*.ts']
-const lessPath = ['src/**/*.less', 'src/app.less']
-const watchLessPath = ['src/**/*.less', 'src/css/**/*.less', 'src/app.less']
+const copyPath = ['src/**/!(_)*.*', '!src/**/*.sass', '!src/**/*.scss', '!src/**/*.ts']
 const sassPath = ['src/**/*.sass', 'src/app.sass', 'src/**/*.scss', 'src/app.scss']
 const watchSassPath = ['src/**/*.sass', 'src/app.sass', 'src/**/*.scss', 'src/app.scss']
 const tsPath = ['src/**/*.ts', 'src/app.ts']
@@ -63,46 +61,10 @@ gulp.task('generatePackageJson', () => {
   return gulp
     .src('./package.json')
     .pipe(
-      jsonTransform(function (data, file) {
+      jsonTransform(function () {
         return {
           dependencies: dependencies,
         }
-      }),
-    )
-    .pipe(gulp.dest(dist))
-})
-
-gulp.task('less', () => {
-  return gulp
-    .src(lessPath, option)
-    .pipe(
-      less().on('error', function (e) {
-        console.error(e.message)
-        this.emit('end')
-      }),
-    )
-    .pipe(postcss([autoprefixer]))
-    .pipe(
-      rename(function (path) {
-        path.extname = '.wxss'
-      }),
-    )
-    .pipe(gulp.dest(dist))
-})
-gulp.task('lessChange', () => {
-  return gulp
-    .src(lessPath, option)
-    .pipe(changed(dist))
-    .pipe(
-      less().on('error', function (e) {
-        console.error(e.message)
-        this.emit('end')
-      }),
-    )
-    .pipe(postcss([autoprefixer]))
-    .pipe(
-      rename(function (path) {
-        path.extname = '.wxss'
       }),
     )
     .pipe(gulp.dest(dist))
@@ -162,7 +124,6 @@ gulp.task('watch', () => {
   gulp.watch(tsPath, gulp.series('tsCompile'))
   const watcher = gulp.watch(copyPath, gulp.series('copyChange'))
   gulp.watch(nodeModulesCopyPath, gulp.series('copyNodeModulesChange'))
-  gulp.watch(watchLessPath, gulp.series('lessChange')) //Change
   gulp.watch(watchSassPath, gulp.series('sassChange')) //Change
   watcher.on('change', function (event) {
     if (event.type === 'deleted') {
@@ -180,7 +141,7 @@ gulp.task(
   'default',
   gulp.series(
     // sync
-    gulp.parallel('copy', 'copyNodeModules', 'generatePackageJson', 'less', 'sass', 'tsCompile'),
+    gulp.parallel('copy', 'copyNodeModules', 'generatePackageJson', 'sass', 'tsCompile'),
     'watch',
   ),
 )
@@ -195,7 +156,6 @@ gulp.task(
       'copy',
       'copyNodeModules',
       'generatePackageJson',
-      'less',
       'sass',
       'tsCompile',
     ),
