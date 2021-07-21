@@ -2,29 +2,22 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"],
-      "@vant/weapp/*": ["path/to/node_modules/@vant/weapp/dist/*"]
+      "@/*": ["src/*"]
     },
-    "strictNullChecks": true,
-    "noImplicitAny": true,
     "module": "CommonJS",
     "target": "ES5",
+    "lib": ["ESNext"],
     "allowJs": false,
-    "experimentalDecorators": true,
-    "noImplicitThis": true,
-    "noImplicitReturns": true,
-    "alwaysStrict": true,
-    "inlineSourceMap": true,
-    "inlineSources": true,
-    "noFallthroughCasesInSwitch": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
+    "skipLibCheck": false,
+    "esModuleInterop": false,
+    "allowSyntheticDefaultImports": true,
     "strict": true,
-    "removeComments": true,
-    "pretty": true,
-    "strictPropertyInitialization": true,
-    "lib": ["es6"]
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "Node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true
   },
-  "include": ["./**/*.ts"],
+  "include": ["./src"],
   "exclude": ["node_modules", "dist"]
 }
