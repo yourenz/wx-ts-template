@@ -30,8 +30,20 @@ const tsPath = ['src/**/*.ts']
 const dependencies = projectConfig && projectConfig.dependencies
 const nodeModulesCopyPath = []
 
-const handleDelFile = async (path) => {
-  const distPath = path.replace('src', 'dist')
+const extObj = {
+  '.scss': '.wxss',
+  '.ts': '.js',
+  '.wxml': '.wxml',
+  '.json': '.json',
+}
+
+const handleDelFile = async (srcPath, type) => {
+  let distPath = srcPath.replace('src', 'dist')
+  if (type === 'file') {
+    const file = distPath.split('.')[0]
+    const ext = '.' + distPath.split('.')[1]
+    distPath = file + extObj[ext]
+  }
   await del([distPath])
 }
 
@@ -124,12 +136,10 @@ gulp.task('clear', () => {
 
 gulp.task('watch', () => {
   gulp.watch(nodeModulesCopyPath, gulp.series('copyNodeModulesChange'))
-  const copyWatcher = gulp.watch(copyPath, gulp.series('copyChange'))
-  const tsWatcher = gulp.watch(tsPath, gulp.series('tsCompile'))
-  const sassWatcher = gulp.watch(sassPath, gulp.series('sassChange'))
-  copyWatcher.on('unlink', (path) => handleDelFile(path))
-  tsWatcher.on('unlink', (path) => handleDelFile(path))
-  sassWatcher.on('unlink', (path) => handleDelFile(path))
+  gulp.watch(tsPath, gulp.series('tsCompile')).on('unlink', (paths) => handleDelFile(paths, 'file'))
+  gulp.watch(sassPath, gulp.series('sassChange')).on('unlink', (paths) => handleDelFile(paths, 'file'))
+  gulp.watch(copyPath, gulp.series('copyChange')).on('unlink', (paths) => handleDelFile(paths, 'file'))
+  gulp.watch(['src/**/!(_)*.*']).on('unlinkDir', (paths) => handleDelFile(paths, 'folder'))
 })
 
 gulp.task(
