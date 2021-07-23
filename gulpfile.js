@@ -139,8 +139,9 @@ gulp.task('watch', () => {
   gulp.watch(tsPath, gulp.series('tsCompile'))
   gulp.watch(sassPath, gulp.series('sassChange'))
   gulp.watch(copyPath, gulp.series('copyChange'))
-  gulp.watch(['src/**/!(_)*.*']).on('unlink', (paths) => handleDelFile(paths, 'file'))
-  gulp.watch(['src/**/!(_)*.*']).on('unlinkDir', (paths) => handleDelFile(paths, 'dir'))
+  gulp.watch(['src/**/!(_)*.*']).on('unlink', (path) => handleDelFile(path, 'file'))
+  // bug: 删除空文件夹时会结束监听
+  gulp.watch(['src/**/!(_)*.*']).on('unlinkDir', (path) => handleDelFile(path, 'dir'))
 })
 
 gulp.task(
