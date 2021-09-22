@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-// https://github.com/godbasin/wxapp-typescript-demo/blob/master/gulpfile.js
-
 const gulp = require('gulp')
 const rename = require('gulp-rename')
 const changed = require('gulp-changed')

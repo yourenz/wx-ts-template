@@ -3,3 +3,4 @@ dist
 .github
 .husky
 src/api
+pnpm-lock.yaml
