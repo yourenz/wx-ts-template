@@ -18,6 +18,9 @@ const projectConfig = require('./package.json')
 const alias = require('gulp-ts-alias')
 const aliases = require('gulp-style-aliases')
 
+const uglify = require('gulp-uglify')
+const cssmin = require('gulp-cssmin')
+
 const option = {
   base: 'src',
   allowEmpty: true,
@@ -74,6 +77,7 @@ gulp.task('sass', () => {
     )
     .pipe(sass())
     .pipe(postcss([autoprefixer]))
+    .pipe(cssmin())
     .pipe(
       rename(function (path) {
         path.extname = '.wxss'
@@ -106,6 +110,7 @@ gulp.task('tsCompile', function () {
     .src()
     .pipe(alias({ configuration: tsProject.config }))
     .pipe(tsProject())
+    .pipe(uglify())
     .pipe(gulp.dest(dist))
 })
 
